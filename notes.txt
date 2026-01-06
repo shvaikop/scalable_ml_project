@@ -1,0 +1,170 @@
+=============================================================================================================
+Stations info:
+
+https://www.smhi.se/data/hitta-data-for-en-plats/ladda-ner-observationer-fran-sjoar-och-vattendrag/waterLevel/20048
+
+https://opendata-download-hydroobs.smhi.se/api/version/latest/parameter/3.json
+
+{
+  "malaren_w": {
+    "name": "MÄLAREN W",
+    "station_id": 20389,
+    "latitude": 59.3284,
+    "longitude": 18.0664,
+    "summary": "Latitud: 59.3284 Longitud: 18.0664",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20389.json",
+    "periods": {
+      "latest-day": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20389/period/latest-day.json",
+      "corrected-archive": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20389/period/corrected-archive.json"
+    }
+  },
+  "hjalmaren_w": {
+    "name": "HJÄLMAREN W",
+    "station_id": 20380,
+    "latitude": 59.2716,
+    "longitude": 16.2936,
+    "summary": "Latitud: 59.2716 Longitud: 16.2936",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380.json",
+    "periods": {
+      "corrected-archive": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380/period/corrected-archive.json"
+    }
+  },
+  "motala": {
+    "name": "MOTALA",
+    "station_id": 154,
+    "latitude": 58.5345,
+    "longitude": 15.0419,
+    "summary": "Latitud: 58.5345 Longitud: 15.0419",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/154.json"
+  },
+  "fageludden": {
+    "name": "FÅGELUDDEN",
+    "station_id": 2455,
+    "latitude": 58.3263,
+    "longitude": 13.58,
+    "summary": "Latitud: 58.3263 Longitud: 13.5800",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2455.json"
+  },
+  "vanern": {
+    "name": "VÄNERN (VÄNERSBORG)",
+    "station_id": 20059,
+    "latitude": 58.3846,
+    "longitude": 12.3208,
+    "summary": "Latitud: 58.3846 Longitud: 12.3208",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20059.json"
+  },
+  "ringsjodammen_ovre": {
+    "name": "RINGSJÖDAMMEN ÖVRE",
+    "station_id": 2176,
+    "latitude": 55.9141,
+    "longitude": 13.4409,
+    "summary": "Latitud: 55.9141 Longitud: 13.4409",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2176.json"
+  },
+  "vombsjon_ovre": {
+    "name": "VOMBSJÖN ÖVRE",
+    "station_id": 2018,
+    "latitude": 55.6984,
+    "longitude": 13.5551,
+    "summary": "Latitud: 55.6984 Longitud: 13.5551",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2018.json"
+  },
+  "byrviksbanken": {
+    "name": "BYRVIKSBANKEN",
+    "station_id": 1906,
+    "latitude": 60.7618,
+    "longitude": 14.9378,
+    "summary": "Latitud: 60.7618 Longitud: 14.9378",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/1906.json"
+  },
+  "storsjon_jamtland": {
+    "name": "STORSJÖN JÄMTLAND",
+    "station_id": 20048,
+    "latitude": 63.2983,
+    "longitude": 14.4601,
+    "summary": "Latitud: 63.2983 Longitud: 14.4601",
+    "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20048.json"
+  }
+}
+
+
+
+The 'href' url can be queried to find out the url to get the data:
+
+Some stations provide url to get all historical data (corrected-archive) only.
+Some also provide url to get only recent data (latest-day)
+
+Example:
+
+(ml_project1) pshvaiko@ps-tp:~/Documents/ml_project$ curl https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380.json | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1486    0  1486    0     0  19052      0 --:--:-- --:--:-- --:--:-- 19298
+{
+  "id": 20380,
+  "key": "20380",
+  "name": "HJÄLMAREN W",
+  "owner": "Extern",
+  "measuringStations": "CORE",
+  "active": true,
+  "latitude": 59.2716,
+  "longitude": 16.2936,
+  "from": 401148000000,
+  "to": 1766268000000,
+  "title": "Vattenstånd - HJÄLMAREN W: Välj tidsutsnitt",
+  "region": 61,
+  "catchmentName": "NORRSTRÖM",
+  "catchmentNumber": 61000,
+  "catchmentSize": 4053.0,
+  "summary": "Latitud: 59.2716 Longitud: 16.2936",
+  "link": [
+    {
+      "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380.json",
+      "rel": "station",
+      "type": "application/json"
+    },
+    {
+      "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380.xml",
+      "rel": "station",
+      "type": "application/xml"
+    },
+    {
+      "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380.atom",
+      "rel": "station",
+      "type": "application/atom+xml"
+    }
+  ],
+  "period": [
+    {
+      "key": "corrected-archive",
+      "updated": 1766268000000,
+      "title": "Data som mätstationen har levererat fram till kl. 00 innevarande dygn.",
+      "summary": "",
+      "link": [
+        {
+          "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380/period/corrected-archive.json",
+          "rel": "period",
+          "type": "application/json"
+        },
+        {
+          "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380/period/corrected-archive.xml",
+          "rel": "period",
+          "type": "application/xml"
+        },
+        {
+          "href": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380/period/corrected-archive.atom",
+          "rel": "period",
+          "type": "application/atom+xml"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
