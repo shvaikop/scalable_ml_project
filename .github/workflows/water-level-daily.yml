@@ -33,3 +33,16 @@ jobs:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
           python scripts/run_batch_job.py
+
+      - name: show git status (debug)
+        run: |
+          git status --porcelain
+          git check-ignore -v artifacts/predictions/*.csv || true
+
+      - name: commit updated artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update water level predictions"
+          file_pattern: |
+            artifacts/predictions/*.csv
+          status_options: '--untracked-files=no'

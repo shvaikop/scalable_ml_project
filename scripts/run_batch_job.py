@@ -6,7 +6,11 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent          # scripts/
 REPO_ROOT = HERE.parent                         # repo root (assuming scripts/ is in repo root)
 
-NOTEBOOK_PATH = REPO_ROOT / "notebooks" / "lake_water_level_batch_inference_pipeline.ipynb"
+
+WEATHER_FEATURE_UPDATE_NOTEBOOK_PATH = REPO_ROOT / "notebooks" / "weather_feature_update_pipeline.ipynb"
+WATER_LEVEL_FEATURE_UPDATE_NOTEBOOK_PATH = REPO_ROOT / "notebooks" / "lake_water_level_feature_update_pipeline.ipynb"
+BATCH_INFERENCE_NOTEBOOK_PATH = REPO_ROOT / "notebooks" / "lake_water_level_batch_inference_pipeline.ipynb"
+
 CONFIG_PATH   = REPO_ROOT / "configs" / "sensors.json"
 
 ARG_MAP = {
@@ -21,8 +25,8 @@ ARG_MAP = {
     "sensor_url": "--sensor-url",
 }
 
-def run_one(cfg: dict) -> None:
-    cmd = ["ipython", str(NOTEBOOK_PATH), "--",]
+def run_one(cfg: dict, notebook_path) -> None:
+    cmd = ["ipython", str(notebook_path), "--",]
     for k, flag in ARG_MAP.items():
         if k not in cfg:
             raise KeyError(f"Config missing key '{k}': {cfg}")
@@ -36,8 +40,13 @@ def main() -> None:
     if not isinstance(configs, list) or not configs:
         raise ValueError("configs/sensors.json must contain a non-empty JSON list.")
 
-    for cfg in configs:
-        run_one(cfg)
+    for nb in [
+        WATER_LEVEL_FEATURE_UPDATE_NOTEBOOK_PATH,
+        WEATHER_FEATURE_UPDATE_NOTEBOOK_PATH,
+        BATCH_INFERENCE_NOTEBOOK_PATH
+    ]:
+        for cfg in configs:
+            run_one(cfg, nb)
 
 if __name__ == "__main__":
     main()

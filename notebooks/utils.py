@@ -95,6 +95,66 @@ def add_water_level_lags(
     return df
 
 
+def add_weather_lagged_aggregated_features(
+    df_weather: pd.DataFrame
+) -> pd.DataFrame:
+    """
+    Create lagged and aggregated features for water-level prediction.
+
+    Returns a single DataFrame aligned by date.
+    """
+
+    # --- Safety checks ---
+    if not isinstance(df_weather.index, pd.DatetimeIndex):
+        raise ValueError("df_weather index must be DatetimeIndex")
+
+    df = df_weather.sort_index()
+
+    # ======================
+    # Precipitation features
+    # ======================
+    df["precip_sum_3d"] = (
+        df["precipitation_sum"]
+        .rolling(window=3, min_periods=3)
+        .sum()
+    )
+
+    df["precip_sum_7d"] = (
+        df["precipitation_sum"]
+        .rolling(window=7, min_periods=7)
+        .sum()
+    )
+
+    df["precip_sum_14d"] = (
+        df["precipitation_sum"]
+        .rolling(window=14, min_periods=14)
+        .sum()
+    )
+
+    # ======================
+    # Snowfall features
+    # ======================
+    df["snow_sum_14d"] = (
+        df["snowfall_sum"]
+        .rolling(window=14, min_periods=14)
+        .sum()
+    )
+
+    df["snow_sum_30d"] = (
+        df["snowfall_sum"]
+        .rolling(window=30, min_periods=30)
+        .sum()
+    )
+
+    df["snow_sum_60d"] = (
+        df["snowfall_sum"]
+        .rolling(window=60, min_periods=60)
+        .sum()
+    )
+
+    return df
+
+
 def normalize_date_to_utc_day(
     df: pd.DataFrame,
     col: str = "date",
