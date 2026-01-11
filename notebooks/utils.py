@@ -1,9 +1,13 @@
+import os
 import requests
+from pathlib import Path
 import pandas as pd
 import math
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 from datetime import date
-from typing import Iterable, Sequence
+from typing import Iterable, Sequence, List, Union
 
 
 
@@ -570,3 +574,144 @@ def fetch_spatial_weather_forecast_75km(
         dfs.append(df)
 
     return pd.concat(dfs, axis=1).sort_index()
+
+
+def get_water_level_features() -> List[str]:
+    """
+    Return the list of water-level feature names used by the model/pipeline.
+    """
+    return [
+        "water_level_cm",
+        "water_level_cm_t_1",
+        "water_level_cm_t_3",
+        "water_level_cm_t_7",
+        "water_level_cm_t_14",
+    ]
+
+
+def get_weather_features() -> List[str]:
+    """
+    Return the list of weather feature names used by the model/pipeline.
+    """
+    weather_features = [
+        # Local
+        "precipitation_sum",
+        "snowfall_sum",
+        "rain_sum",
+        "temperature_2m_mean",
+        "wind_speed_10m_mean",
+        "surface_pressure_mean",
+
+        # Aggregated
+        "precip_sum_3d",
+        "precip_sum_7d",
+        "precip_sum_14d",
+        "snow_sum_14d",
+        "snow_sum_30d",
+        "snow_sum_60d",
+    ]
+
+    # Spatial (75 km)
+    for d in ["n", "s", "e", "w"]:
+        weather_features.extend([
+            f"precipitation_sum_{d}_75km",
+            f"snowfall_sum_{d}_75km",
+            f"rain_sum_{d}_75km",
+            f"temperature_2m_mean_{d}_75km",
+            f"wind_speed_10m_mean_{d}_75km",
+            f"surface_pressure_mean_{d}_75km",
+        ])
+    return weather_features
+
+
+def plot_actual_vs_predicted(
+    df: pd.DataFrame,
+    output_dir: Union[str, Path],
+    output_filename: str,
+    date_col: str = "date",
+    actual_col: str = "water_level_cm",
+    pred_col: str = "predicted_water_level_cm",
+    title: str = "Actual vs Predicted Water Level",
+    month_tick_interval: int = 2,
+    show: bool = True,
+) -> str:
+    """
+    Plot actual vs. predicted values over time and save the figure to disk.
+
+    The function:
+    - selects `date_col`, `actual_col`, and `pred_col` from `df`
+    - converts the date column to timezone-aware UTC datetimes
+    - sorts the data chronologically
+    - plots actual as a solid line and predicted as a dashed line
+    - formats the x-axis ticks as year-month at a configurable interval
+    - saves the plot to `output_dir/output_filename`
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input data containing date, actual values, and predicted values.
+    output_dir : str | pathlib.Path
+        Directory where the plot image will be saved. Created if it does not exist.
+    output_filename : str
+        Output filename (e.g., "actual_vs_pred.png"). Should include an image extension.
+    date_col : str, default "date"
+        Name of the datetime column.
+    actual_col : str, default "water_level_cm"
+        Name of the column containing ground-truth values.
+    pred_col : str, default "predicted_water_level_cm"
+        Name of the column containing model predictions.
+    title : str, default "Actual vs Predicted Water Level"
+        Plot title.
+    month_tick_interval : int, default 2
+        Interval for month ticks on the x-axis (e.g., 2 -> every 2 months).
+    show : bool, default True
+        If True, displays the plot. If False, only saves it.
+
+    Returns
+    -------
+    str
+        The full path to the saved plot file.
+
+    Raises
+    ------
+    KeyError
+        If any of `date_col`, `actual_col`, or `pred_col` is missing from `df`.
+    """
+    # Validate columns
+    missing = [c for c in (date_col, actual_col, pred_col) if c not in df.columns]
+    if missing:
+        raise KeyError(f"Missing required columns: {missing}")
+
+    # Prepare data
+    df_plot = df[[date_col, actual_col, pred_col]].copy()
+    df_plot[date_col] = pd.to_datetime(df_plot[date_col], utc=True, errors="raise")
+    df_plot = df_plot.sort_values(date_col)
+
+    # Ensure output directory exists
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / output_filename
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(14, 6))
+    ax.plot(df_plot[date_col], df_plot[actual_col], label="Actual", linewidth=2)
+    ax.plot(df_plot[date_col], df_plot[pred_col], label="Predicted", linewidth=2, linestyle="--")
+
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=month_tick_interval))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    fig.autofmt_xdate(rotation=45)
+
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Water Level (cm)")
+    ax.set_title(title)
+    ax.legend()
+    ax.grid(True)
+    fig.tight_layout()
+
+    fig.savefig(output_path, dpi=150)
+    if show:
+        plt.show()
+    else:
+        plt.close(fig)
+
+    return str(output_path)
