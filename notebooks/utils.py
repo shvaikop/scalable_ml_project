@@ -715,3 +715,10 @@ def plot_actual_vs_predicted(
         plt.close(fig)
 
     return str(output_path)
+
+
+def get_model_name(sensor_name: str, sensor_id: Union[str, int]) -> str:
+    return f"model_{sensor_name}_{sensor_id}"
+
+
+
