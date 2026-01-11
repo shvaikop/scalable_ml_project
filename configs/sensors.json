@@ -1,0 +1,101 @@
+[
+  {
+    "latitude": 59.3284,
+    "longitude": 18.0664,
+    "sensor_id": 20389,
+    "sensor_name": "malaren_w",
+    "water_level_fg_version": 4,
+    "weather_fg_version": 4,
+    "fv_version": 2,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20389/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 59.2716,
+    "longitude": 16.2936,
+    "sensor_id": 20380,
+    "sensor_name": "hjalmaren_w",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20380/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 58.5345,
+    "longitude": 15.041,
+    "sensor_id": 154,
+    "sensor_name": "motala",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/154/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 58.3263,
+    "longitude": 13.58,
+    "sensor_id": 2455,
+    "sensor_name": "fageludden",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2455/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 58.3846,
+    "longitude": 12.3208,
+    "sensor_id": 20059,
+    "sensor_name": "vanern",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20059/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 55.914,
+    "longitude": 13.4409,
+    "sensor_id": 2176,
+    "sensor_name": "ringsjodammen_ovre",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2176/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 55.6984,
+    "longitude": 13.5551,
+    "sensor_id": 2018,
+    "sensor_name": "vombsjon_ovre",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/2018/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 60.7618,
+    "longitude": 14.9378,
+    "sensor_id": 1906,
+    "sensor_name": "byrviksbanken",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/1906/period/corrected-archive/data.json"
+  },
+  {
+    "latitude": 63.2983,
+    "longitude": 14.4601,
+    "sensor_id": 20048,
+    "sensor_name": "storsjon_jamtland",
+    "water_level_fg_version": 1,
+    "weather_fg_version": 1,
+    "fv_version": 1,
+    "model_version": 1,
+    "sensor_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/3/station/20048/period/corrected-archive/data.json"
+  }
+]
