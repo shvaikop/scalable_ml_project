@@ -32,4 +32,4 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          python scripts/run_notebook_batch.py
+          python scripts/run_batch_job.py
