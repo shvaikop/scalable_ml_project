@@ -3,7 +3,7 @@ name: water-level-daily
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '14 9 * * *'
 
 jobs:
   run_pipelines:

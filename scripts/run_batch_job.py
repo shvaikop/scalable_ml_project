@@ -41,8 +41,8 @@ def main() -> None:
         raise ValueError("configs/sensors.json must contain a non-empty JSON list.")
 
     for nb in [
-        # WATER_LEVEL_FEATURE_UPDATE_NOTEBOOK_PATH,
-        # WEATHER_FEATURE_UPDATE_NOTEBOOK_PATH,
+        WATER_LEVEL_FEATURE_UPDATE_NOTEBOOK_PATH,
+        WEATHER_FEATURE_UPDATE_NOTEBOOK_PATH,
         BATCH_INFERENCE_NOTEBOOK_PATH
     ]:
         for cfg in configs:
